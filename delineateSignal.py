@@ -16,15 +16,15 @@ dbase = 'staffiii/data'
 rec = '052c'
 sNum = 1
 
-# When in linux
-s, att = wfdb.srdsamp(rec,pbdir=dbase)
-annot = wfdb.rdann(rec, 'event', pbdir=dbase)
-sName = att['signame']
+# # When in linux
+# s, att = wfdb.srdsamp(rec,pbdir=dbase)
+# annot = wfdb.rdann(rec, 'event', pbdir=dbase)
+# sName = att['signame']
 
-## When in Windows
-#s, att = wfdb.rdsamp(rec,pb_dir=dbase)
-#annot = wfdb.rdann(rec, 'event', pb_dir=dbase)
-#sName = att['sig_name']
+# When in Windows
+s, att = wfdb.rdsamp(rec,pn_dir=dbase)
+annot = wfdb.rdann(rec, 'event', pn_dir=dbase)
+sName = att['sig_name']
 
 # Ranges to analyse signal
 beg = int(np.floor(2**16))
