@@ -14,7 +14,7 @@ import numpy as np
 import csv
 import ECGprocessing as ecg
 
-dbase = 'staffiii/data'
+dbase = 'staff_data/data'
 fName = 'delinResults.h5'
 tests = ['BR', 'BC1', 'BC2', 'BI1', 'BI2', 'BI3', 'BI4', 'BI5', 'PC1', 'PC2', 'PR1', 'PR2']
 leadNames = ['V1','V2','V3','V4','V5','V6','DI','DII','DIII','aVR','aVL','aVF']
@@ -45,7 +45,7 @@ for patient in range(1,len(annot)):
         rec = annot[patient][measurement] # Find the name of the record
         if rec != '': # Check that the record exists
             try:
-                s, att = wfdb.srdsamp(rec.zfill(4),pbdir=dbase) # Read from Physionet
+                s, att = wfdb.rdsamp(f'{dbase}/{rec.zfill(4)}') # Read from local directory
                 # Calculate augmented limb leads and append them to the signals
                 aVR, aVL, aVF = ecg.augmentedLimbs(s[:,-3], s[:,-2])
                 s = np.concatenate((s, aVR, aVL, aVF), axis=1) 
@@ -75,7 +75,7 @@ for patient in range(1,len(annot)):
         rec = annot[patient][measurement] # Find the name of the record
         if rec != '': # Check that the record exists
             try:
-                s, att = wfdb.srdsamp(rec.zfill(4),pbdir=dbase) # Read from Physionet
+                s, att = wfdb.rdsamp(f'{dbase}/{rec.zfill(4)}') # Read from local directory
                 
                 # Read the annotations
                 a1,a2,_ = annot[patient][measurement+1].split(';')
@@ -117,7 +117,7 @@ for patient in range(1,len(annot)):
         rec = annot[patient][measurement] # Find the name of the record
         if rec != '': # Check that the record exists
             try:
-                s, att = wfdb.srdsamp(rec.zfill(4),pbdir=dbase) # Read from Physionet
+                s, att = wfdb.rdsamp(f'{dbase}/{rec.zfill(4)}') # Read from local directory
                 # Calculate augmented limb leads and append them to the signals
                 aVR, aVL, aVF = ecg.augmentedLimbs(s[:,-3], s[:,-2])
                 s = np.concatenate((s, aVR, aVL, aVF), axis=1) 
@@ -144,4 +144,3 @@ for patient in range(1,len(annot)):
 
 # Close file
 outFile.close()
-        
