@@ -13,6 +13,10 @@ import wfdb
 import numpy as np
 import csv
 import ECGprocessing as ecg
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 dbase = 'staff_data/data'
 fName = 'delinResults.h5'
@@ -39,7 +43,11 @@ outFile = h5py.File(fName,'w')
 
 # Process one patient at a time
 for patient in range(1,len(annot)):
-    print('Processing patient', patient)
+
+    # Log the progress message
+    progress = ((patient) / (len(annot) - 1)) * 100
+    logging.info(f"Processing patient {patient}: Progress: {progress:.2f}% done")
+
     # Process BR, BC1 and BC2
     for measurement in range(0,3):
         rec = annot[patient][measurement] # Find the name of the record
