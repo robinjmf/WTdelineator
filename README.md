@@ -47,11 +47,12 @@ The project requires the following:
    pip install -r requirements.txt
     ```
 2. Download the required datasets:
-**STAFF III Dataset**
+
+
+    **STAFF III Dataset**
    - [Download STAFF III Dataset](https://physionet.org/content/staffiii/1.0.0/)
    
-   
-**MIT-BIH Arrhythmia Database**
+    **MIT-BIH Arrhythmia Database**
    - [Download MIT-BIH Arrhythmia Database](https://physionet.org/content/mitdb/1.0.0/)
    
 
