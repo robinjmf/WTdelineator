@@ -49,10 +49,11 @@ The project requires the following:
 2. Download the required datasets:
 **STAFF III Dataset**
    - [Download STAFF III Dataset](https://physionet.org/content/staffiii/1.0.0/)
-   - Requires the `annotations.csv` file provided in the repository for processing the STAFF III database.
+   
+   
 **MIT-BIH Arrhythmia Database**
    - [Download MIT-BIH Arrhythmia Database](https://physionet.org/content/mitdb/1.0.0/)
-   - This dataset includes annotation files in `.atr` format.
+   
 
 
 ### Notes
@@ -77,4 +78,3 @@ Edit
 3. Added detailed instructions for running the project with both datasets.
 4. Included an evaluation summary for the two datasets.
 
-This updated `README.md` provides a complete and clear explanation for anyone who wants to use or test the project.
