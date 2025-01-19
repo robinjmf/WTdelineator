@@ -22,6 +22,7 @@ International license (https://creativecommons.org/licenses/by-sa/4.0/)
 """
 
 import numpy as np
+from scipy.signal import butter, filtfilt
 
 def augmentedLimbs(DI,DII):
     '''
@@ -257,5 +258,40 @@ def delineateMultiLeadECG(sig,fs):
         
     return ECGdelin
 
+def extract_annotations(ECGdelin):
+    """
+    Extracts detected annotations (e.g., Pon, P, Pend, QRSon, R, QRSend, Ton, T, Tend)
+    from the delineation results.
+
+    Parameters:
+        ECGdelin (list): Output of delineateMultiLeadECG, containing delineation results
+                         for each lead. Each entry is a numpy array with rows of:
+                         [Pon, P, Pend, QRSon, R, QRSend, Ton, T, Tend].
+
+    Returns:
+        detected_annotations (list): A combined list of all detected annotations
+                                     (onset, peaks, and end points of waves).
+    """
+    detected_annotations = []
+
+    # Process each lead's delineation results
+    for lead_result in ECGdelin:
+        # Flatten the result for this lead into a single list of annotations
+        for beat in lead_result:
+            detected_annotations.extend(beat)  # Add all annotations from the beat
+
+    # Remove duplicates (optional, depending on use case)
+    detected_annotations = sorted(set(detected_annotations))
+
+    return detected_annotations
+
+
+# Bandpass filter for signal preprocessing
+def bandpass_filter(signal, fs, lowcut=0.5, highcut=50):
+    nyquist = 0.5 * fs
+    low = lowcut / nyquist
+    high = highcut / nyquist
+    b, a = butter(2, [low, high], btype="band")
+    return filtfilt(b, a, signal)
 
             
